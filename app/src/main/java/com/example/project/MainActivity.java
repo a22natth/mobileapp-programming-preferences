@@ -1,6 +1,7 @@
 package com.example.project;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -26,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         Button button = findViewById(R.id.button_startActivity);
-        button.setOnClickListener(new View.OnClickListener(){
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, SecondActivity.class);
@@ -34,36 +35,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-    }
-    @Override
-    public void onResume(){
-        super.onResume();
-        myPreferenceRef = getPreferences(MODE_PRIVATE);
+// Get a reference to the shared preference
+        myPreferenceRef = getSharedPreferences("MyPreferenceName", MODE_PRIVATE);
         myPreferenceEditor = myPreferenceRef.edit();
 
-        TextView prefTextRef=new TextView(this);
-        prefTextRef=(TextView)findViewById(R.id.prefText);
+// Display preferences
+        TextView prefTextRef = new TextView(this);
+        prefTextRef = (TextView) findViewById(R.id.prefText);
         prefTextRef.setText(myPreferenceRef.getString("MyAppPreferenceString", "No preference found."));
 
-    }
-
-    public void savePref(View v){
-        // Get the text
-        EditText newPrefText=new EditText(this);
-        newPrefText=(EditText)findViewById(R.id.settingseditview);
-
-        // Store the new preference
-        myPreferenceEditor.putString("MyAppPreferenceString", newPrefText.getText().toString());
-        myPreferenceEditor.apply();
-
-        // Display the new preference
-        TextView prefTextRef=new TextView(this);
-        prefTextRef=(TextView)findViewById(R.id.prefText);
-        prefTextRef.setText(myPreferenceRef.getString("MyAppPreferenceString", "No preference found."));
-
-        // Clear the EditText
-        newPrefText.setText("");
     }
 
 }
