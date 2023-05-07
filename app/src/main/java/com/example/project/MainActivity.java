@@ -30,11 +30,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, SecondActivity.class);
-                intent.putExtra("name", "Web app");
                 startActivity(intent);
             }
         });
 
+
+    }
+    @Override
+    public void onResume(){
+        super.onResume();
         myPreferenceRef = getPreferences(MODE_PRIVATE);
         myPreferenceEditor = myPreferenceRef.edit();
 
@@ -43,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         prefTextRef.setText(myPreferenceRef.getString("MyAppPreferenceString", "No preference found."));
 
     }
+
     public void savePref(View v){
         // Get the text
         EditText newPrefText=new EditText(this);
