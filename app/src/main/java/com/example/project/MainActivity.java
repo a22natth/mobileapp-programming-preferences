@@ -26,6 +26,16 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        // Get a reference to the shared preference
+        myPreferenceRef = getSharedPreferences("MyPreferenceName", MODE_PRIVATE);
+        myPreferenceEditor = myPreferenceRef.edit();
+
+        // Display preferences
+        TextView prefTextRef = new TextView(this);
+        prefTextRef = (TextView) findViewById(R.id.prefText);
+        prefTextRef.setText(myPreferenceRef.getString("MyAppPreferenceString", "No preference found."));
+
+
         Button button = findViewById(R.id.button_startActivity);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,14 +45,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-// Get a reference to the shared preference
-        myPreferenceRef = getSharedPreferences("MyPreferenceName", MODE_PRIVATE);
-        myPreferenceEditor = myPreferenceRef.edit();
-
-// Display preferences
-        TextView prefTextRef = new TextView(this);
-        prefTextRef = (TextView) findViewById(R.id.prefText);
-        prefTextRef.setText(myPreferenceRef.getString("MyAppPreferenceString", "No preference found."));
 
     }
 
