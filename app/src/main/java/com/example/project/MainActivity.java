@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
         prefTextRef = (TextView) findViewById(R.id.prefText);
         prefTextRef.setText(myPreferenceRef.getString("MyAppPreferenceString", "No preference found."));
 
-
         Button button = findViewById(R.id.button_startActivity);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
 
     }
 
