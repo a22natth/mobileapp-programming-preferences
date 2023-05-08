@@ -21,7 +21,20 @@ public class SecondActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.secondactivity);
+
+
         @SuppressLint({"MissingInflatedId", "LocalSuppress"}) TextView textview = findViewById(R.id.textViewSecond);
+
+        // Get a reference to the shared preference
+        myPreferenceRef = getSharedPreferences("MyPreferenceName", MODE_PRIVATE);
+        myPreferenceEditor = myPreferenceRef.edit();
+        // Display preferences
+        TextView prefTextRef = new TextView(this);
+        prefTextRef = (TextView) findViewById(R.id.prefText);
+        prefTextRef.setText(myPreferenceRef.getString("MyAppPreferenceString", "No preference found."));
+
+
+
         Button button = findViewById(R.id.backButton);
         button.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -32,7 +45,7 @@ public class SecondActivity extends AppCompatActivity {
         });
         }
 
-    public void savePref(View v){
+    public void savePref(View view){
         // Get the text
         EditText newPrefText=new EditText(this);
         newPrefText=(EditText)findViewById(R.id.settingseditview);
